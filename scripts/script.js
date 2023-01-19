@@ -1,9 +1,13 @@
-const inputBtn = document.getElementById("input-btn");
 const inputEl = document.getElementById("input-el");
 const ulEl = document.getElementById("ul-el");
+
 const delBtn = document.getElementById("delete-btn");
+const inputBtn = document.getElementById("input-btn");
+const saveTab = document.getElementById("save-tab-btn");
+
 const leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"));
 console.log(leadsFromLocalStorage);
+
 let myLeads = [];
 
 if (leadsFromLocalStorage) {
@@ -31,4 +35,12 @@ inputBtn.addEventListener("click", function () {
 
   localStorage.setItem("myLeads", JSON.stringify(myLeads));
   render(myLeads);
+});
+
+saveTab.addEventListener("click", function () {
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    myLeads.push(tabs[0].url);
+    localStorage.setItem("myLeads", JSON.stringify(myLeads));
+    render(myLeads);
+  });
 });
