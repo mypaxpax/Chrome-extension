@@ -1,12 +1,10 @@
 const inputEl = document.getElementById("input-el");
 const ulEl = document.getElementById("ul-el");
-
 const delBtn = document.getElementById("delete-btn");
 const inputBtn = document.getElementById("input-btn");
 const saveTab = document.getElementById("save-tab-btn");
 
 const leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"));
-console.log(leadsFromLocalStorage);
 
 let myLeads = [];
 
@@ -32,7 +30,6 @@ delBtn.addEventListener("dblclick", function () {
 inputBtn.addEventListener("click", function () {
   myLeads.push(inputEl.value);
   inputEl.value = "";
-
   localStorage.setItem("myLeads", JSON.stringify(myLeads));
   render(myLeads);
 });
